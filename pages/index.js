@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MeetUps from "../components/meetups/MeetupList";
 
 const DUMMY_MEETUPS = [
@@ -30,8 +30,17 @@ const DUMMY_MEETUPS = [
   },
 ];
 
-const index = () => {
-  return <MeetUps meetups={DUMMY_MEETUPS} />;
+const index = (props) => {
+  return <MeetUps meetups={props.meetups} />;
 };
+
+export async function getStaticProps() {
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS,
+    },
+    revalidate: 10,
+  };
+}
 
 export default index;
